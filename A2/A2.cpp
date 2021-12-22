@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
     //for number of threads from 1 to 10
     for (int threads=1; threads<=10;threads++)
     {
-
+        zero_init_matrix(c,mLen);
         times[threads-1]=-omp_get_wtime();
 
         #pragma omp parallel for shared(a,b,c) num_threads(threads)
@@ -96,14 +96,6 @@ int main(int argc, char* argv[])
 
         times[threads-1]+=omp_get_wtime();
     }
-
-    cout << "\nfor i-j-k multiplication\n";
-    cout << "Number of threads |     Time    | Efficiency\n";
-
-    for(int i=0;i<10;i++)
-    {
-        printf("%17d | %0.5e | %1.3f\n",i+1,times[i],times[0]/times[i]);
-    }
     
     if(isDebug)
     {   
@@ -112,20 +104,28 @@ int main(int argc, char* argv[])
         {
             for(int j=0;j<mLen;j++)
             {
-                cout << b[i][j] << " ";
+                cout << c[i][j] << " ";
             }
 
             cout << "\n";
         }
     }
+    else
+    {
+        cout << "\nfor i-j-k multiplication\n";
+        cout << "Number of threads |     Time    | Efficiency\n";
 
-    zero_init_matrix(c,mLen);
+        for(int i=0;i<10;i++)
+        {
+            printf("%17d | %0.5e | %1.3f\n",i+1,times[i],times[0]/times[i]);
+        }
+    }
 
     //j-k-i
     //for number of threads from 1 to 10
     for (int threads=1; threads<=10;threads++)
     {
-
+        zero_init_matrix(c,mLen);
         times[threads-1]=-omp_get_wtime();
 
         #pragma omp parallel for shared(a,b,c) num_threads(threads)
@@ -137,15 +137,6 @@ int main(int argc, char* argv[])
         times[threads-1]+=omp_get_wtime();
     }
 
-    cout << "\nfor j-k-i multiplication\n";
-    cout << "Number of threads |     Time    | Efficiency\n";
-
-    for(int i=0;i<10;i++)
-    {
-        printf("%17d | %0.5e | %1.3f\n",i+1,times[i],times[0]/times[i]);
-    }
-
-
     if(isDebug)
     {   
         cout<<"\nMatrix C j-k-i:\n";
@@ -153,10 +144,20 @@ int main(int argc, char* argv[])
         {
             for(int j=0;j<mLen;j++)
             {
-                cout << b[i][j] << " ";
+                cout << c[i][j] << " ";
             }
 
             cout << "\n";
+        }
+    }
+    else
+    {
+        cout << "\nfor j-k-i multiplication\n";
+        cout << "Number of threads |     Time    | Efficiency\n";
+
+        for(int i=0;i<10;i++)
+        {
+            printf("%17d | %0.5e | %1.3f\n",i+1,times[i],times[0]/times[i]);
         }
     }
 
@@ -166,7 +167,7 @@ int main(int argc, char* argv[])
     //for number of threads from 1 to 10
     for (int threads=1; threads<=10;threads++)
     {
-
+        zero_init_matrix(c,mLen);
         times[threads-1]=-omp_get_wtime();
 
         #pragma omp parallel for shared(a,b,c) num_threads(threads)
@@ -178,16 +179,6 @@ int main(int argc, char* argv[])
         times[threads-1]+=omp_get_wtime();
     }
 
-    cout << "\nfor i-k-j multiplication\n";
-    cout << "Number of threads |     Time    | Efficiency\n";
-
-    for(int i=0;i<10;i++)
-    {
-        printf("%17d | %0.5e | %1.3f\n",i+1,times[i],times[0]/times[i]);
-    }
-
-
-
     if(isDebug)
     {   
         cout<<"\nMatrix C i-k-j:\n";
@@ -195,11 +186,22 @@ int main(int argc, char* argv[])
         {
             for(int j=0;j<mLen;j++)
             {
-                cout << b[i][j] << " ";
+                cout << c[i][j] << " ";
             }
 
             cout << "\n";
         }
     }
+    else
+    {
+        cout << "\nfor i-k-j multiplication\n";
+        cout << "Number of threads |     Time    | Efficiency\n";
+
+        for(int i=0;i<10;i++)
+        {
+            printf("%17d | %0.5e | %1.3f\n",i+1,times[i],times[0]/times[i]);
+        }
+    }
+
     return 0;
 }
