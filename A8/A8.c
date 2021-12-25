@@ -1,4 +1,4 @@
-#include <iostream>
+<iostream>
 #include <mpi.h>
 #include <math.h>
 using namespace std;
@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
 			if (elements[i] == 0)
 				printf("%18d | %15d | %0.5e |             | %f\n", elements[i], int(elements[i] * sizeof(int)), times[i], times[i] / 2.0 * iters);
 			else
-				printf("%18d | %15d | %0.5e | %0.5e | \n", elements[i], int(elements[i] * sizeof(int)), times[i], 2.0 * elements[i] * iters / times[i]);
+				printf("%18d | %15d | %0.5e | %0.5e | \n", elements[i], int(elements[i] * sizeof(int)), times[i], 2.0 * (elements[i] * sizeof(int)) * iters / times[i]);
 		}
 	}
 
