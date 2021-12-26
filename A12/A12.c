@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 	MPI_Send_init(&sbuf[1], 1, MPI_INT, next, 5, MPI_COMM_WORLD, &reqs[3]);
 
 	int isCompleted = 0;
-	for (int i = 0; (isCompleted==0)&&(i < 100); i++) 
+	for (int i = 0; i < 2; i++)
 	{
 		sbuf[0] = rank;
 		sbuf[1] = rank;
