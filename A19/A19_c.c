@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "mpi.h"
 using namespace std;
 int main(int argc, char **argv)
@@ -13,7 +14,7 @@ int main(int argc, char **argv)
 	MPI_Status status;
 	MPI_Comm intercomm;
 
-	strcpy_c(port_name, argv[1]);
+	strcpy_s(port_name, argv[1]);
 	cout << "Attempt to connect\n";
 
 	MPI_Comm_connect(port_name, MPI_INFO_NULL, 0, MPI_COMM_SELF, &intercomm);
