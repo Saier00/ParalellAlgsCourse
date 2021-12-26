@@ -1,7 +1,7 @@
 #include <iostream>
 #include "mpi.h"
-using namespace std;
-int main(int argc, char** argv)
+#include <iostream>
+int main(int argc, char **argv)
 {
 	int rank, size, prev, next;
 	int buf[2];
@@ -19,9 +19,9 @@ int main(int argc, char** argv)
 	MPI_Isend(&rank, 1, MPI_INT, prev, 6, MPI_COMM_WORLD, &reqs[2]);
 	MPI_Isend(&rank, 1, MPI_INT, next, 5, MPI_COMM_WORLD, &reqs[3]);
 	MPI_Waitall(4, reqs, stats);
-
+	
 	//Your code here.
 	//Here you need to display the number of the current process, and what it receives from the previous and next processes.
-	cout << "Process rank: " << rank << " | Previous: " << buf[0] << " | Next: " << buf[1] << "\n";
+	cout<<"Process rank: "<<rank<<" | Previous: "<<buff[0]<<" | Next: "<<buff[1]<<"\n";
 	MPI_Finalize();
 }
