@@ -35,11 +35,10 @@ int main(int argc, char** argv)
 		MPI_Waitall(4, reqs, stats);
 
 		MPI_Testall(4, reqs, &isCompleted, stats);
+
+		if (isCompleted!=0)
+			cout << "Process rank: " << rank << " | Previous: " << rbuf[0] << " | Next: " << rbuf[1] << "\n";
 	}
-
-	if (isCompleted!=0)
-		cout << "Process rank: " << rank << " | Previous: " << rbuf[0] << " | Next: " << rbuf[1] << "\n";
-
 
 	MPI_Request_free(&reqs[0]);
 	MPI_Request_free(&reqs[1]);
