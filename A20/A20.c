@@ -4,17 +4,19 @@
 using namespace std;
 #define BUFSIZE 100
 
-void MPI_File_create_write_random(MPI_Comm comm, const char* filename,MPI_Info info, MPI_File* fh, MPI_Status* status)
+void MPI_File_create_write_random(MPI_Comm comm, const char* filename, MPI_Info info, MPI_File* fh, MPI_Status* status)
 {
 
 	MPI_File_open(comm, filename, MPI_MODE_CREATE | MPI_MODE_WRONLY, info, fh);
-	MPI_File_write(*fh, "StringWithSomeText8124", 30, MPI_CHAR, status);
+	MPI_File_write(*fh, "StringWithSomeText8124\0", 23, MPI_CHAR, status);
 	MPI_File_close(fh);
 }
 
 
 int main(int argc, char** argv)
 {
+	int del = atoi(argv[1]);
+
 	int num, sum;
 	MPI_Init(&argc, &argv);
 	MPI_Status status;
@@ -35,10 +37,8 @@ int main(int argc, char** argv)
 
 	MPI_File_close(&fh);
 
-	//To check file
-	getchar();
-
-	MPI_File_delete("file.txt", MPI_INFO_NULL);
+	if(del==1)
+		MPI_File_delete("file.txt", MPI_INFO_NULL);
 	//print the number of read symbols sum from the file
 	cout << "Number of read symbols from the file: " << sum;
 	MPI_Finalize();
